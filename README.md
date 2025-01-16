@@ -7,7 +7,7 @@ Bot Discord
 
 - Interaction
 
-- /task : create new task assign user and with date description time
+/task : create new task assign user and with date description time
 
 ![alt text](image.png)
 
@@ -17,9 +17,9 @@ Bot Discord
 
 - Event
 
-- userJoin: create noti for user in the channel direct
+userJoin: create noti for user in the channel direct
 
-  ![alt text](image-3.png)
+![alt text](image-3.png)
 
 # Requirement
 
