@@ -97,7 +97,7 @@ const discordListener = () => {
       // Embed for task assignment
       const embed = new EmbedBuilder()
         .setColor("#00FF00")
-        .setTitle("📋 New Task Assigned")
+        .setTitle(`📋 Task: ${description}`)
         .setDescription(
           `**Task:** ${description}\n` +
             `**Assigned to:** ${user}\n` +
@@ -107,10 +107,22 @@ const discordListener = () => {
         .setFooter({ text: `Assigned by ${interaction.user.tag}` })
         .setTimestamp();
 
-      const taskMessage = await interaction.reply({
+      // Send the task in the current channel
+      await interaction.reply({
         embeds: [embed],
-        fetchReply: true,
       });
+
+      const taskMessage = await interaction.fetchReply();
+
+      const targetChannel = await client.channels.fetch(
+        process.env.CHANNEL_TARGET
+      );
+
+      if (targetChannel && targetChannel.isTextBased()) {
+        await targetChannel.send({ embeds: [embed] });
+      } else {
+        console.error("❌ Target channel not found or is not a text channel.");
+      }
 
       // Allowed emojis for interaction
       const allowedEmojis = ["👍", "❤️", "👎"];
@@ -125,7 +137,7 @@ const discordListener = () => {
 
       const collector = taskMessage.createReactionCollector({
         filter,
-        time: 86400000,
+        time: 86400000, // 24 hours
       });
 
       collector.on("collect", (reaction, user) => {
