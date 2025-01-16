@@ -8,9 +8,11 @@ const {
   REST,
   Routes,
   ButtonBuilder,
+  ButtonStyle,
 } = require("discord.js");
 const { interactionTaskCreate } = require("../util/interactionCreate.util");
 const { commands } = require("../util/command.util");
+const { ActionRowBuilder } = require("discord.js");
 
 const discordListener = () => {
   const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
@@ -70,9 +72,9 @@ const discordListener = () => {
 
     // Button
     const customBotButton = new ButtonBuilder()
-      .setLabel("Custom Bot")
+      .setLabel("Website")
       .setStyle(ButtonStyle.Link)
-      .setURL("https://green-bot.app/custom");
+      .setURL("https://sportlinker.site");
 
     const row = new ActionRowBuilder().addComponents(customBotButton);
 

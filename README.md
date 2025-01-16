@@ -19,6 +19,8 @@ Bot Discord
 
 - userJoin: create noti for user in the channel direct
 
+  ![alt text](image-3.png)
+
 # Requirement
 
 node -v >= 20.6.0
@@ -28,10 +30,10 @@ node -v >= 20.6.0
 Create your .env file
 
 ```
-BOT_TOKEN=          # Discord bot token
-BOT_CLIENT_ID=      # Bot client id
-SERVER_PORT=        # port of server running
-channel_direct_id=  # channel u want bot reply to
+SERVER_PORT=
+BOT_TOKEN=
+BOT_CLIENT_ID=
+CHANNEL_WELCOME=
 ```
 
 Then running terminal with
