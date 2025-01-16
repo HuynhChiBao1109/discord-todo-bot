@@ -52,6 +52,8 @@ const discordListener = () => {
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
       GatewayIntentBits.MessageContent,
+      GatewayIntentBits.GuildMembers, // Fetch members (online/offline)
+      GatewayIntentBits.GuildPresences, // To check online/offline status
     ],
   });
   // chanel 1252932322697678900
@@ -75,10 +77,9 @@ const discordListener = () => {
     }
   });
 
-  // Handle the /task command
   client.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
-
+    // Handle the /task command
     if (interaction.commandName === "task") {
       const user = interaction.options.getUser("user");
       const description = interaction.options.getString("description");
@@ -114,18 +115,18 @@ const discordListener = () => {
 
       const taskMessage = await interaction.fetchReply();
 
-      const targetChannel = await client.channels.fetch(
-        process.env.CHANNEL_TARGET
-      );
+      // const targetChannel = await client.channels.fetch(
+      //   process.env.CHANNEL_TARGET
+      // );
 
-      if (targetChannel && targetChannel.isTextBased()) {
-        await targetChannel.send({ embeds: [embed] });
-      } else {
-        console.error("❌ Target channel not found or is not a text channel.");
-      }
+      // if (targetChannel && targetChannel.isTextBased()) {
+      //   await targetChannel.send({ embeds: [embed] });
+      // } else {
+      //   console.error("❌ Target channel not found or is not a text channel.");
+      // }
 
       // Allowed emojis for interaction
-      const allowedEmojis = ["👍", "❤️", "👎"];
+      const allowedEmojis = ["✅", "👍", "👎"];
       for (const emoji of allowedEmojis) {
         await taskMessage.react(emoji);
       }
