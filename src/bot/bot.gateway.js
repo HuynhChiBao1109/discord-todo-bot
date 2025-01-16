@@ -7,6 +7,7 @@ const {
   SlashCommandBuilder,
   REST,
   Routes,
+  ButtonBuilder,
 } = require("discord.js");
 const { interactionTaskCreate } = require("../util/interactionCreate.util");
 const { commands } = require("../util/command.util");
@@ -52,7 +53,31 @@ const discordListener = () => {
     }
   });
 
-  client.on("guildScheduledEventUserAdd", (event) => {});
+  // Welcome message when a user joins
+  client.on("guildMemberAdd", async (member) => {
+    const channel = member.guild.channels.cache.get(
+      process.env.CHANNEL_WELCOME
+    );
+
+    const embed = new EmbedBuilder()
+      .setColor("#1746a9")
+      .setTitle("✅ Welcome to SportLinker")
+      .setDescription(`Please read careful the rules \n`)
+      .setFooter({
+        text: "If you have any questions, feel free to ask in the chat!",
+      })
+      .setTimestamp();
+
+    // Button
+    const customBotButton = new ButtonBuilder()
+      .setLabel("Custom Bot")
+      .setStyle(ButtonStyle.Link)
+      .setURL("https://green-bot.app/custom");
+
+    const row = new ActionRowBuilder().addComponents(customBotButton);
+
+    channel.send({ embeds: [embed], components: [row] });
+  });
 
   client.login(process.env.BOT_TOKEN);
 };
