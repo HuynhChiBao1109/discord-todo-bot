@@ -20,13 +20,8 @@ async function interactionTaskCreate(interaction) {
   // Embed for task assignment
   const embed = new EmbedBuilder()
     .setColor("#00FF00")
-    .setTitle(`📋 Task: ${description}`)
-    .setDescription(
-      `**Task:** ${description}\n` +
-        `**Assigned to:** ${user}\n` +
-        `**Type:** ${typeTask === "fe" ? "Frontend" : "Backend"}\n` +
-        `**Due Date:** ${dueDate}`
-    )
+    .setTitle(`📋 [${typeTask}] - ${description}`)
+    .setDescription(`**Assigned to:** ${user}\n` + `**Due Date:** ${dueDate}`)
     .setFooter({ text: `Assigned by ${interaction.user.tag}` })
     .setTimestamp();
 
