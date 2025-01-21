@@ -58,24 +58,24 @@ async function interactionTaskCreate(interaction) {
     time: 86400000, // 24 hours
   });
 
-  collector.on("collect", (reaction, user) => {
-    if (reaction.emoji.name === "👍") {
-      interaction.followUp({
-        content: `${user.tag} marked the task as **successful**! ✅`,
-        ephemeral: true,
-      });
-    } else if (reaction.emoji.name === "❤️") {
-      interaction.followUp({
-        content: `${user.tag} marked the task as **completed**! ✅`,
-        ephemeral: true,
-      });
-    } else if (reaction.emoji.name === "👎") {
-      interaction.followUp({
-        content: `${user.tag} marked the task as **failed**! ❌`,
-        ephemeral: true,
-      });
-    }
-  });
+  // collector.on("collect", (reaction, user) => {
+  //   if (reaction.emoji.name === "👍") {
+  //     interaction.followUp({
+  //       content: `${user.tag} marked the task as **successful**! ✅`,
+  //       ephemeral: true,
+  //     });
+  //   } else if (reaction.emoji.name === "❤️") {
+  //     interaction.followUp({
+  //       content: `${user.tag} marked the task as **completed**! ✅`,
+  //       ephemeral: true,
+  //     });
+  //   } else if (reaction.emoji.name === "👎") {
+  //     interaction.followUp({
+  //       content: `${user.tag} marked the task as **failed**! ❌`,
+  //       ephemeral: true,
+  //     });
+  //   }
+  // });
 
   collector.on("end", () => {
     console.log("Reaction collection ended.");
